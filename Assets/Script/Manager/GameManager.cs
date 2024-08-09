@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
     // Start is called before the first frame update
     void Start()
     {
-        LoadFirstLevel();
+        PlayMusic("1");
     }
 
     // Update is called once per frame
@@ -16,7 +16,7 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    void LoadFirstLevel()
+    void PlayMusic(string musicLocation)
     {
 
     }
