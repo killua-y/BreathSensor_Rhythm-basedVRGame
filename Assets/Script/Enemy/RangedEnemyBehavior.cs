@@ -27,42 +27,10 @@ public class RangedEnemyBehavior : MonoBehaviour
 
     void Shoot()
     {
-        BulletBehavior bulletBehavior = Instantiate(bullet, this.transform).GetComponent<BulletBehavior>();
+        CrakedItemBehavior bulletBehavior = Instantiate(bullet, this.transform).GetComponent<CrakedItemBehavior>();
         bulletBehavior.transform.position = this.transform.position;
-        switch (bpm)
-        {
-            case 34:
-                bulletBehavior.transform.position += new Vector3(0, 2, 0);
-                bulletBehavior.gameObject.GetComponent<MeshRenderer>().material.color = Color.blue;
-                bulletBehavior.transform.localScale = Vector3.one * 3;
-                break;
-            case 68:
-                bulletBehavior.gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
-                bulletBehavior.transform.localScale = Vector3.one * 2;
-                //if (counter == 0)
-                //{
-                //    Destroy(bulletBehavior);
-                //    counter = 1;
-                //}
-                //else
-                //{
-                //    counter -= 1;
-                //}
-                break;
-            case 136:
-                bulletBehavior.transform.position += new Vector3(0, -2, 0);
-                bulletBehavior.gameObject.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                //if (counter == 0)
-                //{
-                //    Destroy(bulletBehavior);
-                //    counter = 3;
-                //}
-                //else
-                //{
-                //    counter -= 1;
-                //}
-                break;
-        }
-        bulletBehavior.SetUp(player, 5);
+        bulletBehavior.transform.rotation = this.transform.rotation;
+
+        bulletBehavior.SetUp(5);
     }
 }

@@ -1,3 +1,4 @@
+using Oculus.Interaction;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class BulletBehavior : MonoBehaviour
     private Rigidbody rb;
     private float speed = 10f;
     private int damage;
-    public GameObject destoryEffect;
+    public GameObject crakedItem;
 
     private void Start()
     {
@@ -29,14 +30,37 @@ public class BulletBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerBehavior>().TakeDamage(damage);
+            other.gameObject.GetComponent<PlayerBehavior>().TakeDamage(damage);
+            Destroy(this.gameObject);
         }
-        else if (other.CompareTag("Weapon"))
+        else if (other.gameObject.CompareTag("Weapon"))
         {
-            Instantiate(destoryEffect);
-            destoryEffect.transform.position = this.transform.position;
+            GameObject newCrakedItem = Instantiate(crakedItem);
+            newCrakedItem.transform.position = this.transform.position;
+
+            // Get the position of the weapon
+            Vector3 weaponPosition = other.transform.position;
+
+            // Apply force to each piece
+            foreach (Transform piece in newCrakedItem.transform)
+            {
+                Rigidbody rb = piece.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    // Calculate the direction from the weapon to the piece
+                    Vector3 forceDirection = piece.position - weaponPosition;
+                    forceDirection.Normalize();
+
+                    // Apply force to the piece in the calculated direction
+                    float forceMagnitude = 5f; // Adjust this value to control how strong the force is
+                    rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
+                }
+
+                Destroy(this.gameObject, 3f);
+            }
+
             Destroy(this.gameObject);
         }
     }
