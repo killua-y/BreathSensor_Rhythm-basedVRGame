@@ -1,12 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
+using static UnityEngine.GraphicsBuffer;
 
 public class BulletBehavior : MonoBehaviour
 {
     private Rigidbody rb;
     private float speed = 10f;
     private int damage;
+    public GameObject destoryEffect;
+
+    private void Start()
+    {
+        GameObject player = FindAnyObjectByType<PlayerBehavior>().gameObject;
+        SetUp(player, 5);
+    }
 
     public void SetUp(GameObject _target, int _damage)
     {
@@ -26,6 +35,8 @@ public class BulletBehavior : MonoBehaviour
         }
         else if (other.CompareTag("Weapon"))
         {
+            Instantiate(destoryEffect);
+            destoryEffect.transform.position = this.transform.position;
             Destroy(this.gameObject);
         }
     }

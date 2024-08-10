@@ -11,7 +11,7 @@ public class PlayerBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        newGame();
     }
 
     void newGame()
@@ -32,5 +32,6 @@ public class PlayerBehavior : MonoBehaviour
     {
         currentHealth -= amout;
         PlayerHealthSlider.value = currentHealth;
+        Debug.Log("Take damage :" + amout);
     }
 }
