@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
+    public SoundManager soundManager;
+    public RangedEnemyBehavior rangedEnemyBehavior;
     // Start is called before the first frame update
     void Start()
     {
-        PlayMusic("1");
     }
 
     // Update is called once per frame
@@ -16,8 +17,9 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    void PlayMusic(string musicLocation)
+    public void PlayMusic()
     {
-
+        soundManager.PlayMusic();
+        rangedEnemyBehavior.PlayMusic();
     }
 }
