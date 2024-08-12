@@ -6,6 +6,8 @@ public class GameManager : Singleton<GameManager>
 {
     public SoundManager soundManager;
     public RangedEnemyBehavior rangedEnemyBehavior;
+    public GameObject Leftcontroller;
+    public GameObject Rightcontroller;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,8 @@ public class GameManager : Singleton<GameManager>
 
     public void PlayMusic()
     {
+        Leftcontroller.SetActive(false);
+        Rightcontroller.SetActive(false);
         soundManager.PlayMusic();
         rangedEnemyBehavior.PlayMusic();
     }

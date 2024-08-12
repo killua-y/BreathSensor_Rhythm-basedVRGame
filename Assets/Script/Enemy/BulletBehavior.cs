@@ -37,6 +37,11 @@ public class BulletBehavior : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Weapon"))
         {
+            if (!other.GetComponent<WeaponBehavior>().isPunching())
+            {
+                return;
+            }
+
             GameObject newCrakedItem = Instantiate(crakedItem);
             newCrakedItem.transform.position = this.transform.position;
 
