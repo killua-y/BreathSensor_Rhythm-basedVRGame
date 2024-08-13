@@ -7,10 +7,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class BulletBehavior : MonoBehaviour
 {
+    public int hardness = 1;
     private Rigidbody rb;
     private float speed = 10f;
     private int damage;
     public GameObject crakedItem;
+    public AudioClip soundClip;
 
     private void Start()
     {
@@ -28,6 +30,33 @@ public class BulletBehavior : MonoBehaviour
         Destroy(gameObject, 10f);
     }
 
+    private bool CalculateHardness()
+    {
+        if (hardness == 1)
+        {
+            return true;
+        }
+        else if (hardness == 2) 
+        {
+            if (FindAnyObjectByType<PlayerBehavior>().GetCurrentBreath() >= 50)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (hardness == 3)
+        {
+            return FindAnyObjectByType<PlayerBehavior>().IsHoldingBreath();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -38,6 +67,11 @@ public class BulletBehavior : MonoBehaviour
         else if (other.gameObject.CompareTag("Weapon"))
         {
             if (!other.GetComponent<WeaponBehavior>().isPunching())
+            {
+                return;
+            }
+
+            if (!CalculateHardness())
             {
                 return;
             }
@@ -65,7 +99,7 @@ public class BulletBehavior : MonoBehaviour
 
                 Destroy(this.gameObject, 3f);
             }
-
+            SoundManager.Instance.PlaySound(soundClip);
             Destroy(this.gameObject);
         }
     }

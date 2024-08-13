@@ -43,4 +43,15 @@ public class PlayerBehavior : MonoBehaviour
         PlayerHealthSlider.value = currentHealth;
         Debug.Log("Take damage :" + amout);
     }
+
+    public int GetCurrentBreath()
+    {
+        return currentBreath; 
+    }
+
+    public bool IsHoldingBreath()
+    {
+        return true;
+    }
+
 }
