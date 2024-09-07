@@ -38,18 +38,11 @@ public class BulletBehavior : MonoBehaviour
         }
         else if (hardness == 2) 
         {
-            if (FindAnyObjectByType<PlayerBehavior>().GetCurrentBreath() >= 50)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return (BreathManager.isDecreasingBreath || BreathManager.isHoldingBreath);
         }
         else if (hardness == 3)
         {
-            return FindAnyObjectByType<PlayerBehavior>().IsHoldingBreath();
+            return BreathManager.isHoldingBreath;
         }
         else
         {
@@ -97,7 +90,7 @@ public class BulletBehavior : MonoBehaviour
                     rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
                 }
 
-                Destroy(this.gameObject, 3f);
+                Destroy(this.gameObject, 1f);
             }
             SoundManager.Instance.PlaySound(soundClip);
             Destroy(this.gameObject);

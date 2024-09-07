@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a735c32416daa9d4da18810ac6da9a7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hardness: 1
+  hardness: 3
   crakedItem: {fileID: 4511673943446495101, guid: 8cfe71f239e86db448937fdda6616f24,
     type: 3}
   soundClip: {fileID: 8300000, guid: d9bd1c95ce5b30f45a148c5f2905def5, type: 3}

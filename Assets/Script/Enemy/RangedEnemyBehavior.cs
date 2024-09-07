@@ -1,10 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEngine.GraphicsBuffer;
 
 public class RangedEnemyBehavior : MonoBehaviour
 {
@@ -49,6 +45,22 @@ public class RangedEnemyBehavior : MonoBehaviour
         else if (counter == 4)
         {
             newBullet = hardness2Bullet;
+        }
+        else if (counter == 5)
+        {
+            newBullet = null;
+        }
+        else if (counter == 6)
+        {
+            newBullet = null;
+        }
+        else if (counter == 7)
+        {
+            newBullet = null;
+        }
+        else if (counter == 8)
+        {
+            newBullet = hardness3Bullet;
             counter = 0;
         }
         else
