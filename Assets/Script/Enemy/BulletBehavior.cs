@@ -1,4 +1,5 @@
 using Oculus.Interaction;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -92,6 +93,8 @@ public class BulletBehavior : MonoBehaviour
 
                 Destroy(this.gameObject, 1f);
             }
+
+            FindAnyObjectByType<PointTextBehavior>().OnBulletHit(hardness);
             SoundManager.Instance.PlaySound(soundClip);
             Destroy(this.gameObject);
         }
