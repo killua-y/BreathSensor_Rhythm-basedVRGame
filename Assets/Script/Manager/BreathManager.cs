@@ -18,7 +18,7 @@ public class BreathManager : MonoBehaviour
     public static bool isHoldingBreath;
     public static bool isDecreasingBreath;
 
-    public float holdingThreshold = 1.0f;  // Acceptable range for holding breath
+    public float holdingThreshold = 3.0f;  // Acceptable range for holding breath
     public float holdingTime = 2.0f;  // Time in seconds to consider breath as held
 
     private int lastBreathValue;
