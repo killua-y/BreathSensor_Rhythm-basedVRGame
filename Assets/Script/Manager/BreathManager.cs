@@ -7,8 +7,8 @@ public class BreathManager : MonoBehaviour
 {
     public string portName = "COM3";  // Adjust this to match your Arduino's port
     public int baudRate = 9600;
-    public int max;
-    public int min;
+    public int max = 230;
+    public int min = 160;
 
     private SerialPort serialPort;
 
@@ -19,7 +19,7 @@ public class BreathManager : MonoBehaviour
     public static bool isDecreasingBreath;
 
     public float holdingThreshold = 3.0f;  // Acceptable range for holding breath
-    public float holdingTime = 2.0f;  // Time in seconds to consider breath as held
+    public float holdingTime = 0.3f;  // Time in seconds to consider breath as held
 
     private int lastBreathValue;
     private float lastUpdateTime;
