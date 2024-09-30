@@ -12,7 +12,6 @@ public class BulletBehavior : MonoBehaviour
     private Rigidbody rb;
     private float speed = 10f;
     private int damage;
-    public GameObject crakedItem;
     public AudioClip soundClip;
 
     private void Start()
@@ -70,32 +69,10 @@ public class BulletBehavior : MonoBehaviour
                 return;
             }
 
-            GameObject newCrakedItem = Instantiate(crakedItem);
-            newCrakedItem.transform.position = this.transform.position;
-
-            // Get the position of the weapon
-            Vector3 weaponPosition = other.transform.position;
-
-            // Apply force to each piece
-            foreach (Transform piece in newCrakedItem.transform)
-            {
-                Rigidbody rb = piece.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    // Calculate the direction from the weapon to the piece
-                    Vector3 forceDirection = piece.position - weaponPosition;
-                    forceDirection.Normalize();
-
-                    // Apply force to the piece in the calculated direction
-                    float forceMagnitude = 5f; // Adjust this value to control how strong the force is
-                    rb.AddForce(forceDirection * forceMagnitude, ForceMode.Impulse);
-                }
-
-                Destroy(this.gameObject, 1f);
-            }
-
             FindAnyObjectByType<PointTextBehavior>().OnBulletHit(hardness);
             SoundManager.Instance.PlaySound(soundClip);
+            EffectManager.Instance.PlayEffect("HitEffect", this.transform.position);
+
             Destroy(this.gameObject);
         }
     }
